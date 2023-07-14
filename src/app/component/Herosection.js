@@ -23,7 +23,9 @@ export default function Herosection() {
                 latest and greatest movies, and find your new favorite today.
               </p>
               <Link href="/movie">
-                <button className={mulish.className}>Explore Movies</button>
+                <button className={`${mulish.className} ${herostyle.button}`}>
+                  Explore Movies
+                </button>
               </Link>
             </div>
             <div className={herostyle.hero_image}></div>
