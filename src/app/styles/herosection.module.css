@@ -18,14 +18,20 @@
 /*        background-position: 0% 50%;*/
 /*    }*/
 /*}*/
-.button {
-  position: absolute;
+.explorebutton {
+  /* position: absolute; */
   /* top: 50%; */
   background-color: #0a0a23;
   color: #fff;
   border: none;
   border-radius: 17px;
   padding: 9px;
+  /* cursor: pointer; */
+}
+.explorebutton :hover {
+  background: #fff;
+  cursor: pointer;
+  color: #0a0a23;
 }
 .hero_content {
   display: flex;
@@ -36,16 +42,17 @@
 
 .hero_content h1 {
   text-transform: uppercase;
-  font-size: 1.8rem;
+  font-size: 2.8rem;
   color: #000;
 }
 
 .hero_content p {
-  /* margin: 2rem 0 4rem 0; */
+  margin: 2rem 0 4rem 0;
   font-weight: 300;
-  /* letter-spacing: 0.05rem; */
+  letter-spacing: 0.05rem;
   line-height: 1.65;
-  /*font-family: 'Mulish', sans-serif;*/
+  font-size: 17px;
+  font-family: "Mulish", sans-serif;
 }
 
 .hero_image {

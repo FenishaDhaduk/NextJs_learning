@@ -2,6 +2,7 @@ import herostyle from "@/app/styles/herosection.module.css";
 import style from "@/app/styles/common.module.css";
 import Link from "next/link";
 import { Mulish } from "next/font/google";
+import Image from "next/image";
 
 const mulish = Mulish({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -9,26 +10,35 @@ const mulish = Mulish({
   display: "swap",
 });
 
-export default function Herosection() {
+export default function Herosection({ title, imageUrl }) {
   return (
     <>
       <main className={herostyle.main_section}>
         <div className={style.container}>
           <div className={style.grid_two_section}>
             <div className={herostyle.hero_content}>
-              <h1>LET&apos;S WATCH MOVIE TOGETHER</h1>
+              <h1>{title}</h1>
               <p>
                 &#128512; From award-winning dramas to blockbuster action
                 movies, we&apos;ve got you covered. Browse our selection of the
                 latest and greatest movies, and find your new favorite today.
               </p>
               <Link href="/movie">
-                <button className={`${mulish.className} ${herostyle.button}`}>
+                <button
+                  className={`${mulish.className} ${herostyle.explorebutton}`}
+                >
                   Explore Movies
                 </button>
               </Link>
             </div>
-            <div className={herostyle.hero_image}></div>
+            <div className={herostyle.hero_image}>
+              <Image
+                src={imageUrl}
+                alt="watching a netflix"
+                width={500}
+                height={500}
+              />
+            </div>
           </div>
         </div>
       </main>

@@ -19,7 +19,7 @@ export default function Navbar() {
               href="../about"
               //   onClick={() => setOpenMenu(false)}
             >
-              about
+              About
             </Link>
           </li>
           <li className={styles.navbarItem}>
@@ -27,7 +27,7 @@ export default function Navbar() {
               href="../movie"
               //   onClick={() => setOpenMenu(false)}
             >
-              movie
+              Movie
             </Link>
           </li>
           <li className={styles.navbarItem}>
@@ -35,7 +35,7 @@ export default function Navbar() {
               href="../contact"
               //   onClick={() => setOpenMenu(false)}
             >
-              contact
+              Contact
             </Link>
           </li>
         </ul>
