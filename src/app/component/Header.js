@@ -1,7 +1,7 @@
-import styles from "@/app/navbar.module.css";
+import styles from "@/app/styles/navbar.module.css";
 import Link from "next/link";
 import Image from "next/image";
-// import Nav from "@/app/components/Nav";
+import Nav from "@/app/component/Navbar";
 
 const header = () => {
   return (
@@ -11,7 +11,7 @@ const header = () => {
           <Image src="next.svg" alt="my logo image" width={150} height={40} />
         </Link>
       </div>
-      {/* <Nav /> */}
+      <Nav />
     </header>
   );
 };

@@ -1,9 +1,9 @@
-import Image from 'next/image'
+import Herosection from "@/app/component/Herosection"
 
 export default function Home() {
   return (
    <>
-   home page
+ <Herosection/>
    </>
   )
 }
