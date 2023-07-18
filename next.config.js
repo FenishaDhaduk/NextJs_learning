@@ -1,5 +1,6 @@
 const nextConfig = {
   reactStrictMode: true,
+  output: "export",
   images: {
     domains: ["images.unsplash.com", "media.istockphoto.com"],
   },

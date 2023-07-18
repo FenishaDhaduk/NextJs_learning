@@ -9,6 +9,7 @@ import Head from "next/head";
 
 export default function pageno() {
   const router = useRouter();
+  // router.query.pageno ,<= in this pageno is a file name add
   const pageNumber = router.query.pageno;
 
   const customLoader = ({ src, width, quality }) => {
