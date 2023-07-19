@@ -10,7 +10,7 @@ export default function Contact() {
         <Contactcard />
         <section className={style.contact_section}>
           <h2>
-            We'd love to hear <span> from you </span>
+            We&apos;d love to hear <span> from you </span>
           </h2>
 
           <ContactForm />
