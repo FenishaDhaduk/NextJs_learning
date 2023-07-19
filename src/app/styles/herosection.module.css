@@ -18,21 +18,7 @@
 /*        background-position: 0% 50%;*/
 /*    }*/
 /*}*/
-.explorebutton {
-  /* position: absolute; */
-  /* top: 50%; */
-  background-color: #0a0a23;
-  color: #fff;
-  border: none;
-  border-radius: 17px;
-  padding: 9px;
-  /* cursor: pointer; */
-}
-.explorebutton :hover {
-  background: #fff;
-  cursor: pointer;
-  color: #0a0a23;
-}
+
 .hero_content {
   display: flex;
   flex-direction: column;

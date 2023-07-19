@@ -2,6 +2,7 @@ import MovieCard from "@/app/component/MovieCard";
 import styles from "@/app/styles/common.module.css";
 
 const movie = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const url = process.env.RAPID_KEY;
 
   const options = {
@@ -20,9 +21,10 @@ const movie = async () => {
     <>
       <section className={styles.movieSection}>
         <div className={styles.container}>
-          <h1>Series & Movie</h1>
+          <h1 style={{ color: "#fb0c0c" }}>Series & Movie</h1>
+
           <div className={styles.card_section}>
-            {main_data.map((curElem) => {
+            {main_data.slice(6).map((curElem) => {
               return <MovieCard key={curElem.id} {...curElem} />;
             })}
           </div>

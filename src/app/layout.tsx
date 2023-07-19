@@ -1,5 +1,6 @@
 // import './globals.css'
 import Header from "./component/Header"
+import Footer from "./component/Footer"
 import { Mulish } from "next/font/google";
 
 const mulish = Mulish({
@@ -23,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={mulish.className}>
         <Header/>
-        {children}</body>
+        {children}
+        <Footer/>
+        
+        </body>
     </html>
   )
 }
