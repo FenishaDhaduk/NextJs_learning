@@ -3,13 +3,13 @@ import Link from "next/link";
 
 const NotFound = () => {
   return (
-    <section style={{ textAlign: "center" }}>
+    <section style={{ textAlign: "center", marginTop: "100px" }}>
       <div>
         <h1>404</h1>
         <h2>Not Found</h2>
         <p>Could not find requested resource</p>
         <Link href="/">
-          <button>Go to Home Page</button>
+          <button className={styles.button_css}>Go to Home Page</button>
         </Link>
       </div>
     </section>
