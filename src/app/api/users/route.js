@@ -4,26 +4,18 @@ import { NextResponse } from "next/server"
 
 connectDB()
 
-export function GET(){
-    const users = [
-        {
-            name:"FenishaDhaduk",
-            phonno:123456789,
-            language:"NextJs"
-        },
-        {
-            name:"JohnDoe",
-            phonno:123456789,
-            language:"JAVA"
-        },
-        {
-            name:"TomJerry",
-            phonno:123456789,
-            language:"NODEJS"
-        }
-    ]
-    // nextResponce responce send karva mate
-    return NextResponse.json(users)
+export async function GET(){
+    let users = []
+    try {
+        users = await User.find().select("-password")
+        return NextResponse.json(users)
+    } catch (error) {
+        return NextResponse.json({
+            message:"Failed to load a user",
+            status:false
+        })
+        
+    }
 
 }
 
@@ -40,15 +32,16 @@ export async function POST(request){
 
     // Create a user
   try {
-    const {name,email,password,about} = request.json()
+    const {name,email,password,about} = await request.json()
     const user = new User({
         name,email,password,about
     })
-   const responce = NextResponse.json(user,{
-    status:200,
-    message:"Successfully user created"
-
-   })
+    await user.save()
+    const responce = NextResponse.json(user,{
+        status:200,
+        message:"Successfully user created"
+        
+    })
    return responce;
   } catch (error) {
     console.log(error)

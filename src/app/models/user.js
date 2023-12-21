@@ -3,16 +3,20 @@ const { Schema, default: mongoose } = require("mongoose");
 const userSchema = new Schema({
   name: {
     type: String,
-    required: [true, "Name is required!"]
+    // required: [true, "Name is required!"],
+    
   },
   email: {
     type: String,
     required: [true, "Email is required!"],
+    // unique:[true,"Email value not be a same"]
   },
   password: {
     type: String,
     required: [true, "Password is required!"],
-    minlength: [6, "Password must be at least 6 characters long"]
+    minlength: [6, "Password must be at least 6 characters long"],
+    // unique:[true,"password not be same"]
+
   },
   about: String,
 });
