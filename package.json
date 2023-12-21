@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "16": "^0.0.2",
+    "18": "^0.0.0",
+    "mongoose": "^8.0.1",
+    "next": "14.0.1",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.1"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
