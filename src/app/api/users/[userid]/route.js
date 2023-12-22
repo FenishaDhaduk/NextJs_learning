@@ -1,10 +1,10 @@
 import { User } from "@/app/models/user"
 import { NextResponse } from "next/server"
-import { connectDB } from "@/helper/db"
+import { connectUserDB } from "@/helper/db"
 
 
 // dynamic routes pass id 
-connectDB()
+connectUserDB()
 
 export async function GET(request, { params }) {
     const {userid} = params

@@ -1,8 +1,8 @@
 import { User } from "@/app/models/user"
-import { connectDB } from "@/helper/db"
+import { connectUserDB } from "@/helper/db"
 import { NextResponse } from "next/server"
 
-connectDB()
+connectUserDB()
 
 export async function GET(){
     let users = []
