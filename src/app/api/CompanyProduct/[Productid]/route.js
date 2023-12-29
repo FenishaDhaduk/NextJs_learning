@@ -21,21 +21,19 @@ export async function GET(request, { params }) {
 export async function PUT(request, { params }) {
   const { Productid } = params;
   const {
-    ProductName,
-    CompanyName,
-    ProductPrize,
-    Quailty,
-    Description,
-    category,
+    title,
+    content,
+    addedDate,
+    status,
+    userId
   } = await request.json();
   try {
     const UpdateProductdata = await Product.findById(Productid);
-    UpdateProductdata.ProductName = ProductName;
-    UpdateProductdata.CompanyName = CompanyName;
-    UpdateProductdata.ProductPrize = ProductPrize;
-    UpdateProductdata.Quailty = Quailty;
-    UpdateProductdata.Description = Description;
-    UpdateProductdata.category = category;
+    UpdateProductdata.title = title;
+    UpdateProductdata.content = content;
+    UpdateProductdata.status = status;
+    UpdateProductdata.userId = userId;
+ 
     const saveresponce = await UpdateProductdata.save();
     return NextResponse.json(saveresponce);
   } catch (error) {

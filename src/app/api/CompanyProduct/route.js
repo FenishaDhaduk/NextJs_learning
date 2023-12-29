@@ -20,34 +20,40 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const {
-      ProductName,
-      CompanyName,
-      ProductPrize,
-      Quailty,
-      Description,
-      category,
-    } = await request.json();
+    const { title, content, status, userId } = await request.json();
 
     const Productdetails = new Product({
-      ProductName,
-      CompanyName,
-      ProductPrize,
-      Quailty,
-      Description,
-      category,
+      title,
+      content,
+      status,
+      userId,
     });
     await Productdetails.save();
-    console.log("Productdetails",Productdetails)
-    const responce = NextResponse.json(Productdetails, {
-      status: 200,
-      message: "Successfully workdata created",
-    });
-    return responce;
+    return new Response(
+      JSON.stringify({
+        status: 200,
+        message: "Successfully user created",
+        Productdetails,
+      }),
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
   } catch (error) {
-    return NextResponse.json({
-      message: "Failed to Create a ProductData",
-      status: false,
-    });
+    console.error(error);
+  
+      return new Response(
+        JSON.stringify({
+          status: 500, // Internal Server Error
+          message: "Failed to create a user",
+          error: error.message,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          status: 500,
+        }
+      );
   }
 }
+

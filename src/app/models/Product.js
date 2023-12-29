@@ -1,28 +1,24 @@
 const { Schema, default: mongoose } = require("mongoose");
 
 const productSchema = new Schema({
-  ProductName: {
+  title: {
     type: String,
     required: [true, "ProductName is required"],
   },
-  CompanyName: {
+  content: {
     type: String,
     required: [true, "CompanyName is required"],
   },
-  ProductPrize: {
-    type: Number,
-    required: [true, "ProductPrize is required"],
-  },
-  Quailty:{
+  status:{
     type:String,
-    required:[true,"ProductQuiality is required"]
+    enum:["Pending","Completed","Added"],
+    default:"Pending"
   },
-  Description:{
-    type:String
-  },
-  category:{
-    type:String,
+  userId:{
+    type:mongoose.ObjectId,
+    required:true
   }
+
 });
 
 

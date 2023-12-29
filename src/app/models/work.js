@@ -21,7 +21,7 @@ const workSchema = new Schema({
         type:Number,
         required:[true,"progress is required"]
 
-    }
+    } 
     
 })
 
