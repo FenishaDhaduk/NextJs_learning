@@ -2,7 +2,7 @@ import { User } from "@/app/models/user";
 import { connectUserDB } from "@/helper/db";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-var jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
 
 connectUserDB();
 
@@ -27,16 +27,26 @@ export async function POST(request) {
         _id: login._id,
         name: login.name,
       },
-     "asdfghjk"
+      process.env.JWT_KEY
     );
-    // create a nextresponce : cookie
-    console.log(token,"responce");
-    const responce = await NextResponse.json({
-      message: "successfully user login !!",
-      success: true,
+
+    const responce = await NextResponse.json(
+      {
+        message: "successfully user login !!",
+        success: true,
+        user: login,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    responce.cookies.set({
+      name: "token",
+      value: token,
     });
-    // cookies.set(name,value,option)
-    responce.cookies.set("logintoken", token);
+
     return responce;
   } catch (error) {
     return NextResponse.json(
@@ -44,7 +54,12 @@ export async function POST(request) {
         success: false,
         message: error.message,
       },
-      { status: 400 }
+      {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
     );
   }
 }

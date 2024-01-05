@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    env: {
-        API_ENDPOINT : 'http://localhost:3001/api/',
-      },
-}
+  reactStrictMode: false,
+  skipTrailingSlashRedirect: true,
+  skipMiddlewareUrlNormalize: true,
+  env: {
+    API_ENDPOINT: "http://localhost:3000/api/",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -4,6 +4,8 @@ import Signupimage from "@/app/assets/Signup.svg";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { doSignup } from "../services/signupservices";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function SignUpPage() {
   const [userdata, setUserData] = useState({
@@ -14,6 +16,8 @@ function SignUpPage() {
   });
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+
+  const [visible, setVisible] = useState(false);
 
   const validateForm = () => {
     let errors = {};
@@ -53,7 +57,7 @@ function SignUpPage() {
         email: "",
         password: "",
         about: "",
-      })
+      });
       return response;
     } catch (error) {
       console.error(error);
@@ -127,6 +131,7 @@ function SignUpPage() {
                   Password
                 </label>
                 <input
+                  type={visible ? "text" : "password"}
                   autoComplete="false"
                   value={userdata?.password}
                   onChange={(event) => {
@@ -134,10 +139,27 @@ function SignUpPage() {
                     validateForm();
                   }}
                   onBlur={validateForm}
-                  type="password"
                   placeholder="Enter here password"
                   className="w-full p-2 rounded-lg bg-gray-500 focus:ring-gray-500-100 border border-gray-400"
                 ></input>
+                <span
+                  style={{
+                    position: "relative",
+                    display: "block",
+                    float: "right",
+                    color: "black",
+                    top: "-2em",
+                    right: "0.8em",
+                    cursor: "pointer",
+                  }}
+                >
+                  {
+                    <FontAwesomeIcon
+                      icon={visible ? faEyeSlash : faEye}
+                      onClick={() => setVisible(!visible)}
+                    />
+                  }
+                </span>
                 {errors.password && (
                   <p style={{ color: "red" }}>{errors.password}</p>
                 )}

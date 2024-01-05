@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, {useState } from "react";
 import loginimage from "@/app/assets/login.svg";
 import Image from "next/image";
 import { doAddTask } from "../services/addtaskservices";
 import { toast } from "react-toastify";
+import Loader from "@/components/Loader";
 
 function AddTask() {
   const metadata = {
@@ -15,11 +16,12 @@ function AddTask() {
     title: "",
     content: "",
     status: "none",
-    userId: "6584206826aee16583dbf980",
+    userId: "",
   });
 
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const validateForm = () => {
     let errors = {};
@@ -38,7 +40,6 @@ function AddTask() {
     }
 
     setErrors(errors);
-    console.log("lengthh",Object.keys(errors).length)
     setIsFormValid(Object.keys(errors).length === 0);
   };
 
@@ -51,21 +52,24 @@ function AddTask() {
         status: task?.status,
         userId: "6584206826aee16583dbf980",
       };
+      setLoader(true);
       const responce = await doAddTask(payload);
       toast.success(responce.message, {
         position: "top-right",
       });
+      setLoader(false);
       setTask({
         title: "",
         content: "",
         status: "none",
       });
-
+      setLoader(false);
       return responce;
     } catch (error) {
       toast.error(error.message, {
         position: "top-right",
       });
+      setLoader(false);
     }
   };
 
@@ -171,15 +175,22 @@ function AddTask() {
               {errors.status && <p style={{ color: "red" }}>{errors.status}</p>}
             </div>
             <div className="mt-4 flex justify-center">
-              <button
-                type="submit"
-                className="bg-blue-600 py-2 px-3 rounded-lg hover:bg-blue-800"
-                onClick={(event) => handleAddTask(event)}
-                disabled={!isFormValid}
-                style={{ opacity: isFormValid ? 1 : 0.5 , cursor:!isFormValid ? "not-allowed" : "pointer"}}
-              >
-                Add Task
-              </button>
+              {loader ? (
+                <Loader height={30} width={28} style={{ color: "white" }} />
+              ) : (
+                <button
+                  type="submit"
+                  className="bg-blue-600 py-2 px-3 rounded-lg hover:bg-blue-800"
+                  onClick={(event) => handleAddTask(event)}
+                  disabled={!isFormValid}
+                  style={{
+                    opacity: isFormValid ? 1 : 0.5,
+                    cursor: !isFormValid ? "not-allowed" : "pointer",
+                  }}
+                >
+                  Add Task
+                </button>
+              )}
               <button
                 type="submit"
                 className="bg-red-600 py-2 px-3 rounded-lg hover:bg-red-900 ms-3"

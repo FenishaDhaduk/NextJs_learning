@@ -17,7 +17,9 @@ const productSchema = new Schema({
   userId:{
     type:mongoose.ObjectId,
     required:true
-  }
+  },
+  createdAt: { type: Date, default: Date.now }, 
+  updatedAt: { type: Date, default: Date.now } 
 
 });
 

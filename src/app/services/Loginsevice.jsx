@@ -1,22 +1,24 @@
+"use client";
+
 export async function doLoginuser(login) {
   const requestOptions = {
     method: "POST",
     body: JSON.stringify(login),
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
 
   try {
-    const response = await fetch(process.env.API_ENDPOINT + "login", requestOptions);
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Failed to sign up");
-    }
-
-    // If response status is in the range 200-299
+    const response = await fetch(
+      process.env.API_ENDPOINT + "login",
+      requestOptions
+    );
     const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.message);
+    }
     return data;
   } catch (error) {
     console.error(error);
@@ -24,3 +26,34 @@ export async function doLoginuser(login) {
   }
 }
 
+export async function GetCurrentuser() {
+  const responce = await fetch(process.env.API_ENDPOINT + "Current");
+  const responseBody = await responce.json();
+
+  return responseBody;
+}
+
+export async function Logoutuser() {
+  const requestOptions = {
+    method: "POST",
+        headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const response = await fetch(
+      process.env.API_ENDPOINT + "logout",
+      requestOptions
+    );
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+}

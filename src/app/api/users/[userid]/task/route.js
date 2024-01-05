@@ -7,3 +7,15 @@ export async function GET(request,{params}){
     })
     return NextResponse.json(fetchusertask)
 }
+
+export async function DELETE(request,{params}){
+    const Deleteusertask = await Product.find({
+        _id:params._id
+    })
+
+    return NextResponse.json({
+        message:"Successfully Task Deleted",
+        success:true,
+        Deleteusertask
+    },{status:200})
+}

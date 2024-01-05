@@ -1,10 +1,15 @@
-
 import { NextResponse } from "next/server";
 
-export default function middleware(request) {
-  const logintoken =  request.cookies.get("logintoken")?.value || ""
+export async function middleware(request) {
+  const logintoken = request.cookies.get("token")?.value || "";
 
-  console.log(logintoken,"logintoken")
+
+  if (
+    request.nextUrl.pathname == "/api/login" ||
+    request.nextUrl.pathname === "/api/users"
+  ) {
+    return;
+  }
 
   const userNotLogin =
     request.nextUrl.pathname === "/login" ||
@@ -16,6 +21,15 @@ export default function middleware(request) {
     }
   } else {
     if (!logintoken) {
+      // if (request.nextUrl.pathname.startsWith("/api")) {
+      //   return NextResponse.json(
+      //     {
+      //       message: "Access Denied !!",
+      //       success: false,
+      //     },
+      //     { status: 400 }
+      //   );
+      // }
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }

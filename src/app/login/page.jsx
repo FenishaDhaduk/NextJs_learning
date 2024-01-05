@@ -1,8 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { doLoginuser } from "../services/Loginsevice";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UserContext from "@/context/userContext";
 
 function LoginPage() {
   const [login, setLogin] = useState({
@@ -12,6 +15,9 @@ function LoginPage() {
 
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const userfetchdata = useContext(UserContext);
+
 
   const validateForm = () => {
     let errors = {};
@@ -42,8 +48,11 @@ function LoginPage() {
     };
     try {
       const response = await doLoginuser(payload);
-  
+
       toast.success(response.message);
+      console.log("name",response?.user?.name)
+      userfetchdata.setUser(response?.user)
+
       router.push("/profile/user");
       setLogin({
         email: "",
@@ -99,10 +108,28 @@ function LoginPage() {
                   validateForm();
                 }}
                 onBlur={validateForm}
-                type="password"
+                type={visible ? "text" : "password"}
                 placeholder="Enter here password"
                 className="w-full p-2 rounded-lg bg-gray-500 focus:ring-gray-500-100 border border-gray-400"
               ></input>
+              <span
+                style={{
+                  position: "relative",
+                  display: "block",
+                  float: "right",
+                  color: "black",
+                  top: "-2em",
+                  right: "0.8em",
+                  cursor: "pointer",
+                }}
+              >
+                {
+                  <FontAwesomeIcon
+                    icon={visible ? faEyeSlash : faEye}
+                    onClick={() => setVisible(!visible)}
+                  />
+                }
+              </span>
               {errors.password && (
                 <p style={{ color: "red" }}>{errors.password}</p>
               )}
