@@ -6,10 +6,6 @@ import { DeleteTaskService } from "../services/addtaskservices";
 function Task({ task, id ,DeleteTask}) {
   const { user } = useContext(UserContext);
 
-console.log("id",task)
-  
-  
-  
   return (
     <div
       className={`shadow-lg text-white mt-2 + ${
@@ -19,7 +15,7 @@ console.log("id",task)
       <div className="p-5">
       <div className="flex justify-between">
       <h1 className="text-2xl font-semibold">{task.title}</h1>
-      <FaX onClick={()=>DeleteTask()}/>
+      <FaX style={{cursor:"pointer"}} onClick={()=>DeleteTask()}/>
       </div>
        
         <p className="font-normal">{task?.content}</p>

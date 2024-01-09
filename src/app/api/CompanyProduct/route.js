@@ -9,7 +9,7 @@ connectCompanyProductDB();
 export async function GET() {
   let fetchProduct = [];
   try {
-    fetchProduct = await Product.find().sort({createdAt:-1})
+    fetchProduct = await Product.find().sort({createdAt:1})
     let totalProduct = await Product.countDocuments({});
 
     return NextResponse.json({fetchProduct,totalProduct});

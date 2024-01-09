@@ -4,7 +4,7 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
   env: {
-    API_ENDPOINT: "http://localhost:3000/api/",
+    API_ENDPOINT: "http://localhost:3001/api/",
   },
 };
 

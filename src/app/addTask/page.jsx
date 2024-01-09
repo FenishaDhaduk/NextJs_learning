@@ -6,6 +6,7 @@ import Image from "next/image";
 import { doAddTask } from "../services/addtaskservices";
 import { toast } from "react-toastify";
 import Loader from "@/components/Loader";
+import { useRouter } from "next/navigation";
 
 function AddTask() {
   const metadata = {
@@ -22,6 +23,7 @@ function AddTask() {
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
   const [loader, setLoader] = useState(false);
+  const router = useRouter()
 
   const validateForm = () => {
     let errors = {};
@@ -57,6 +59,7 @@ function AddTask() {
       toast.success(responce.message, {
         position: "top-right",
       });
+      router.push("/show-tasks");
       setLoader(false);
       setTask({
         title: "",

@@ -12,7 +12,6 @@ const productSchema = new Schema({
   status:{
     type:String,
     enum:["Pending","Completed","Added"],
-    default:"Pending"
   },
   userId:{
     type:mongoose.ObjectId,

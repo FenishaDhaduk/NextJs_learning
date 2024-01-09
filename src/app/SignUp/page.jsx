@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { doSignup } from "../services/signupservices";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
+
 
 function SignUpPage() {
   const [userdata, setUserData] = useState({
@@ -18,6 +20,8 @@ function SignUpPage() {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [visible, setVisible] = useState(false);
+
+  const router = useRouter()
 
   const validateForm = () => {
     let errors = {};
@@ -52,6 +56,7 @@ function SignUpPage() {
     try {
       const response = await doSignup(userdata);
       toast.success(response.message);
+      router.push("/login");
       setUserData({
         name: "",
         email: "",
