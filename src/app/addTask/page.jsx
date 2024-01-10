@@ -1,18 +1,16 @@
 "use client";
 
-import React, {useState } from "react";
+import React, {useContext, useState } from "react";
 import loginimage from "@/app/assets/login.svg";
 import Image from "next/image";
 import { doAddTask } from "../services/addtaskservices";
 import { toast } from "react-toastify";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
+import UserContext from "@/context/userContext";
 
 function AddTask() {
-  const metadata = {
-    title: "Add Task:Work Manager",
-  };
-  // document.title = metadata.title;
+
   const [task, setTask] = useState({
     title: "",
     content: "",
@@ -25,6 +23,8 @@ function AddTask() {
   const [loader, setLoader] = useState(false);
   const router = useRouter()
 
+
+  const context = useContext(UserContext);
   const validateForm = () => {
     let errors = {};
     const { title, content, status } = task;
@@ -88,14 +88,14 @@ function AddTask() {
     <>
       <div className="grid grid-cols-12 justify-center  text-white">
         <div className="col-span-4 col-start-5 p-5 shadow-sm">
-          <div className="my-8 flex justify-center">
+          <div className="my-[4rem] flex justify-center">
             <Image
               src={loginimage}
               style={{ width: "50%" }}
               alt="Login banner"
             />
           </div>
-          <h1 className="text-3xl text-center">Add Your task here!!!</h1>
+          <h1 className="text-3xl text-center">{context?.editTask == true ? "Edit Your Task Here!!!" : "Add Your task here!!!"}</h1>
           <form>
             <div className="mt-4">
               <label

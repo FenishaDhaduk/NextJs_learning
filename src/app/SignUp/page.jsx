@@ -74,7 +74,7 @@ function SignUpPage() {
     <>
       <div className="grid grid-cols-12 text-white">
         <div className="col-span-4 col-start-5">
-          <div className="py-5">
+          <div className="py-[4rem]">
             <div className="my-8 flex justify-center">
               <Image
                 src={Signupimage}

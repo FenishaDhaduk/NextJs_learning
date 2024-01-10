@@ -64,6 +64,8 @@ function page() {
                   <Task
                     task={data}
                     id={data?._id}
+                    editTask = {context?.editTask}
+                    setEditTask = {context?.setEditTask}
                     DeleteTask={() => DeleteTask(data?._id)}
                   ></Task>
                 </>

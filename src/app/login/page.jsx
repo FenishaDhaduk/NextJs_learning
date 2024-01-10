@@ -53,7 +53,7 @@ function LoginPage() {
       console.log("name",response?.user?.name)
       userfetchdata.setUser(response?.user)
 
-      router.push("/profile/user");
+      router.push("/");
       setLogin({
         email: "",
         password: "",
@@ -68,7 +68,7 @@ function LoginPage() {
   return (
     <div className="grid grid-cols-12 text-white">
       <div className="col-span-4 col-start-5">
-        <div className="py-5">
+        <div className="py-[9.25rem]">
           <h1 className="text-3xl text-center">Login Here!!</h1>
           <form className="mt-5">
             <div className="mt-3">

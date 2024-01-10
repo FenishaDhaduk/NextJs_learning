@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 function UseContextprovider({ children }) {
   const [user, setUser] = useState(undefined);
+  const [editTask,setEditTask] = useState(false)
 
   useEffect(() => {
     dofetchuserdata();
@@ -25,7 +26,7 @@ function UseContextprovider({ children }) {
     }
   };
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser ,editTask , setEditTask }}>
       {children}
     </UserContext.Provider>
   );
