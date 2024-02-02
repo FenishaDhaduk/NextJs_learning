@@ -7,12 +7,15 @@ import {
 } from "../services/addtaskservices";
 import { toast } from "react-toastify";
 import UserContext from "@/context/userContext";
-import Task from "./Task";
 import SearchLoader from "@/components/Searchloader";
+import { DragDropContext } from "react-beautiful-dnd";
+import Column from "./Column";
 
 function page() {
-  const [task, setTasks] = useState();
+  const [taskData, setTasks] = useState();
   const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState([]);
+  const [incomplete, setIncomplete] = useState([]);
 
   const context = useContext(UserContext);
 
@@ -20,18 +23,29 @@ function page() {
     if (context?.user?._id) {
       dofetchSingleuserdata();
     }
-    // return () => {
-    //  setTasks()
-    // };
   }, [context?.user?._id]);
 
-  console.log(context, "context");
+  useEffect(() => {
+    fetchtask()
+  }, []);
+
+  const fetchtask = async()=>{
+    const responce = await fetch("https://jsonplaceholder.typicode.com/todos")
+    .then((response) => response.json())
+    .then((json) => {
+      console.log(json)
+      setCompleted(json.filter((task) => task.completed));
+      setIncomplete(json.filter((task) => !task.completed));
+    });
+
+    return responce
+
+  }
 
   const dofetchSingleuserdata = async () => {
     try {
       setLoading(true);
       const responce = await fetchsingleuser(context?.user?._id);
-      console.log(responce, "responce");
       setTasks(responce);
       setLoading(false);
     } catch (error) {
@@ -44,36 +58,50 @@ function page() {
   const DeleteTask = async (id) => {
     console.log(id, "id");
     const responce = await DeleteTaskService(id);
-    const deletetask = task.filter((item) => item._id != id);
+    const deletetask = taskData.filter((item) => item._id != id);
     setTasks(deletetask);
-
-    console.log(deletetask, "responce");
   };
-  console.log("taskkk", task);
+
+  const handleDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+
+    if (source.droppableId == destination.droppableId) return;
+    // remove from source array
+    if (source.droppableId == 2) {
+      setCompleted(removeItemById(draggableId, completed));
+    } else {
+      setIncomplete(removeItemById(draggableId, incomplete));
+    }
+    // get item
+    const task = findItemById(draggableId, [...incomplete, ...completed]);
+
+    // add item
+
+    if( destination.droppableId == 2){
+      setCompleted([{...task , completed : !task.completed}, ...completed])
+    }
+    else{
+      setIncomplete([{...task , completed : !task.completed}, ...incomplete])
+
+    }
+  };
+
+  function findItemById(id, array) {
+    return array.find((item) => item.id == id);
+  }
+
+  function removeItemById(id, array) {
+    return array.find((item) => item.id != id);
+  }
   return (
     <>
-      <div className="grid grid-cols-12 mt-3">
-        {loading ? (
-          <SearchLoader />
-        ) : (
-          <div className="col-span-6 col-start-4">
-            <h1 className="text-3xl">Show Task ({task?.length})</h1>
-            {task?.map((data) => {
-              return (
-                <div className="p-[18px]">
-                  <Task
-                    task={data}
-                    id={data?._id}
-                    editTask = {context?.editTask}
-                    setEditTask = {context?.setEditTask}
-                    DeleteTask={() => DeleteTask(data?._id)}
-                  ></Task>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <div className="flex items-center flex-row">
+          <Column title={"TO DO"} tasks={incomplete} id={"1"}></Column>
+          <Column title={"DONE"} tasks={completed} id={"2"}></Column>
+
+        </div>
+      </DragDropContext>
     </>
   );
 }
