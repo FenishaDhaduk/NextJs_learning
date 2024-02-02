@@ -9,7 +9,7 @@ export async function GET() {
   let users = [];
   try {
     users = await User.find().select("-password");
-    console.log("users",users)
+    console.log("users", users);
     return NextResponse.json(users);
   } catch (error) {
     return NextResponse.json({
@@ -21,14 +21,16 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const { name, email, password, about } = await request.json();
+    
+    const { name, email, password, PhoneNumber} =
+      await request.json();
     const user = new User({
       name,
       email,
       password,
-      about,
+      PhoneNumber,
     });
-
+    console.log(name, email, password, PhoneNumber, "user");
 
     user.password = await bcrypt.hash(
       user.password,
@@ -72,5 +74,3 @@ export function DELETE() {
     { status: 201, statusText: "status Text" }
   );
 }
-
-export function PUT() {}

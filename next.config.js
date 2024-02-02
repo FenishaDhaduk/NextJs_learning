@@ -4,8 +4,9 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
   env: {
-    API_ENDPOINT: "http://localhost:3001/api/",
+    API_ENDPOINT: "http://localhost:3000/api/",
   },
+  plugins: [require("daisyui")],
 };
 
 module.exports = nextConfig;

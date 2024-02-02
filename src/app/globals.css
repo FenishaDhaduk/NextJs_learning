@@ -1,75 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* styles/globals.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
- :root {
-  background-color: black;
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-} 
+:root {
+  --color-primary: #3498db;
+  --color-background-light: #ffffff;
+  --color-text-light: #333333;
+  --color-background-dark: #2d3748;
+  --color-text-dark: #ffffff;
+}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+[data-theme='dark'] {
+  --color-background: var(--color-background-dark);
+  --color-text: var(--color-text-dark);
+}
+
+[data-theme='light'] {
+  --color-background: var(--color-background-light);
+  --color-text: var(--color-text-light);
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100%; 
-} 
-
-html{
-  height: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
-.bg-layers {
-  -webkit-animation: filter-animation 4s infinite;
-  animation: filter-animation 4s infinite;
-}
 
-.bg-scale {
-  -webkit-animation: filter-animation 8s infinite;
-  animation: filter-scale 8s infinite;
-}
 
-@-webkit-keyframes filter-animation {
-  0% {
-    -webkit-filter: hue-rotate(0deg);
-  }
-  50% {
-    -webkit-filter: hue-rotate(45deg);
-  }
-  
-  100% {
-    -webkit-filter: hue-rotate(0deg);
-  }
-}
-
-@keyframes filter-animation {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    filter: hue-rotate(45deg);
-  }
-  100% {
-    filter: hue-rotate(0deg);
-  }
-}
-
-@keyframes filter-scale {
-  0% {
-    transform:scale(1);
-  }
-  50% {
-    transform:scale(1.4);
-  }
-  100% {
-      transform:scale(.8);
-  }
-}

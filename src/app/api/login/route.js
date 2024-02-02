@@ -12,6 +12,8 @@ export async function POST(request) {
     const login = await User.findOne({
       email: email,
     });
+
+    console.log(login,"await request.json()")
     if (login == null) {
       throw new Error("user is not found");
     }

@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeToggle from "@/app/Theme/page";
 import { Logoutuser } from "@/app/services/Loginsevice";
 import UserContext from "@/context/userContext";
 import Image from "next/image";
@@ -18,7 +19,7 @@ function CustomNavbar() {
       const data = await Logoutuser();
       console.log("logout", data);
       userfetchdata.setUser(undefined);
-      router.push("/");
+      router.push("/Login");
       toast.error(data.message);
     } catch (error) {
       console.log(error);
@@ -27,12 +28,12 @@ function CustomNavbar() {
 
   return (
     <>
-      <nav className="bg-white h-16 pt-5 pb-5 flex justify-between items-center fixed w-full top-0 z-50">
+      <nav className="h-16 pt-5 pb-5 flex justify-between items-center fixed w-full top-0 z-50">
         <div className="flex items-center pl-[30px] pr-[30px] m-0 min-w-0 w-[100%] max-w-[1230px] ml-auto mr-auto">
           <a className="m-0 min-w-0 cursor-pointer pr-30px font-black decoration-none">
             <h1 className="m-0 min-w-0 max-w-[100%] h-auto flex">
               {" "}
-              Startup Leading
+              TaskHub
             </h1>
           </a>
           <div className="flex m-0 min-w-0 mr-auto ml-auto">
@@ -85,17 +86,28 @@ function CustomNavbar() {
                       Logout
                     </button>
                   </li>
+                  <li>
+                    <ThemeToggle />
+                  </li>
                 </>
               )}
               {!userfetchdata?.user?.name && (
                 <>
                   <li>
-                    <Link className="hover:text-[#8D448B]" href={"/login"}>
-                      Login
+                    <Link className="hover:text-[#8D448B]" href={"/Signup"}>
+                      Log In
                     </Link>
                   </li>
                   <li>
-                    <Link className="hover:text-[#8D448B] font-[16px] font-bold" href="/SignUp">Register Now </Link>
+                    <Link
+                      className="hover:text-[#8D448B] font-[16px] font-bold"
+                      href="/SignUp"
+                    >
+                      Register Now{" "}
+                    </Link>
+                  </li>
+                  <li>
+                    <ThemeToggle />
                   </li>
                 </>
               )}

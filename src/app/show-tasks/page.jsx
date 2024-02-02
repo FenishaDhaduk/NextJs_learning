@@ -57,10 +57,10 @@ function page() {
           <SearchLoader />
         ) : (
           <div className="col-span-6 col-start-4">
-            <h1 className="text-white text-3xl">Show Task ({task?.length})</h1>
+            <h1 className="text-3xl">Show Task ({task?.length})</h1>
             {task?.map((data) => {
               return (
-                <>
+                <div className="p-[18px]">
                   <Task
                     task={data}
                     id={data?._id}
@@ -68,7 +68,7 @@ function page() {
                     setEditTask = {context?.setEditTask}
                     DeleteTask={() => DeleteTask(data?._id)}
                   ></Task>
-                </>
+                </div>
               );
             })}
           </div>

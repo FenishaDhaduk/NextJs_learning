@@ -30,14 +30,14 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   const { userid } = params;
-  const { name, email, password, about } = await request.json();
+  const { name, email, password, PhoneNumber } = await request.json();
 
   try {
     const updateuser = await User.findById(userid);
     updateuser.name = name;
     updateuser.email = email;
     updateuser.password = password;
-    updateuser.about = about;
+    updateuser.PhoneNumber = PhoneNumber;
 
     const saveresponce = await updateuser.save();
     return NextResponse.json(saveresponce);

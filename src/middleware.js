@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 export async function middleware(request) {
   const logintoken = request.cookies.get("token")?.value || "";
 
-
   if (
     request.nextUrl.pathname == "/api/login" ||
-    request.nextUrl.pathname === "/api/users"
+    request.nextUrl.pathname === "/api/users" ||
+    request.nextUrl.pathname.startsWith("https://www.googleapis.com/oauth2/v3/userinfo")
   ) {
     return;
   }
@@ -21,16 +21,7 @@ export async function middleware(request) {
     }
   } else {
     if (!logintoken) {
-      // if (request.nextUrl.pathname.startsWith("/api")) {
-      //   return NextResponse.json(
-      //     {
-      //       message: "Access Denied !!",
-      //       success: false,
-      //     },
-      //     { status: 400 }
-      //   );
-      // }
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 }
@@ -38,11 +29,11 @@ export async function middleware(request) {
 // See "Matching Paths" below to learn more
 export const config = {
   matcher: [
-    "/",
     "/addTask",
     "/login",
     "/SignUp",
     "/show-tasks",
+    "/Theme",
     "/profile/:path*",
     "/api/:path*",
   ],

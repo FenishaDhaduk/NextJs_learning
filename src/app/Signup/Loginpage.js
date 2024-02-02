@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserContext from "@/context/userContext";
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 function LoginPage() {
   const [login, setLogin] = useState({
@@ -17,7 +19,6 @@ function LoginPage() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [visible, setVisible] = useState(false);
   const userfetchdata = useContext(UserContext);
-
 
   const validateForm = () => {
     let errors = {};
@@ -48,12 +49,12 @@ function LoginPage() {
     };
     try {
       const response = await doLoginuser(payload);
-
+      console.log(response);
       toast.success(response.message);
-      console.log("name",response?.user?.name)
-      userfetchdata.setUser(response?.user)
-
-      router.push("/");
+      userfetchdata.setUser(response?.user);
+      if (response?.success == true) {
+        router.push("/");
+      }
       setLogin({
         email: "",
         password: "",
@@ -65,11 +66,14 @@ function LoginPage() {
     }
   };
 
+
+
   return (
-    <div className="grid grid-cols-12 text-white">
+    <div className="grid grid-cols-12">
       <div className="col-span-4 col-start-5">
         <div className="py-[9.25rem]">
           <h1 className="text-3xl text-center">Login Here!!</h1>
+        
           <form className="mt-5">
             <div className="mt-3">
               <label
@@ -140,7 +144,9 @@ function LoginPage() {
                 disabled={!isFormValid}
                 style={{ opacity: isFormValid ? 1 : 0.5 }}
                 className="bg-green-600 py-2 px-3 rounded-lg hover:bg-green-800"
-                onClick={(event) => handleLogin(event)}
+                onClick={(event) => {
+                  handleLogin(event);
+                }}
               >
                 Login
               </button>

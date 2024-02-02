@@ -1,6 +1,7 @@
 "use client";
 
 export async function doLoginuser(login) {
+  console.log(login,"login")
   const requestOptions = {
     method: "POST",
     body: JSON.stringify(login),
